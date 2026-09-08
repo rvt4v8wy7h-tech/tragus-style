@@ -3,32 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRAGUS STYLE — אל תשחקו איתנו</title>
+<title>Tragus Style | אופנת רחוב ישראלית</title>
+<meta name="description" content="אופנת רחוב ישראלית עם עיצובים בולטים, קפוצ׳ונים, סטים ואביזרים במהדורות מוגבלות.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
-    --ink:#0b0b0c;
-    --ink-soft:#161616;
+    --ink:#050505;
+    --ink-soft:#141414;
     --paper:#f7f7f5;
-    --paper-dim:#ececea;
     --grey:#8a8a85;
-    --line-dark:rgba(247,247,245,0.18);
+    --line-dark:rgba(247,247,245,0.16);
     --line-light:#dcdcd8;
     --danger:#c81e1e;
     --gap:clamp(20px,4vw,64px);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    font-family:'Heebo',sans-serif;
-    background:var(--paper);
-    color:var(--ink);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{font-family:'Heebo',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
   img,svg{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
   button{font-family:inherit;cursor:pointer;}
@@ -36,123 +30,124 @@
   :focus-visible{outline:2px solid var(--danger);outline-offset:3px;}
   .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;}
 
+  /* ---------- ticker ---------- */
+  .ticker{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;font-size:.8rem;padding:9px 0;}
+  .ticker-track{display:inline-flex;animation:tick 22s linear infinite;}
+  .ticker-track span{padding:0 26px;opacity:.85;}
+  .ticker-track span::after{content:"·";margin-inline-start:26px;opacity:.5;}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.ticker-track{animation:none;overflow-x:auto;}}
+
   /* ---------- nav ---------- */
-  .nav{
-    position:fixed;top:0;inset-inline:0;z-index:50;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px var(--gap);
-    background:transparent;color:var(--paper);
-    transition:background .35s ease, color .35s ease, border-color .35s ease;
-    border-bottom:1px solid transparent;
-  }
-  .nav.solid{background:var(--paper);color:var(--ink);border-bottom-color:var(--line-light);}
+  .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px var(--gap);background:var(--paper);border-bottom:1px solid var(--line-light);}
   .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.05rem;letter-spacing:.02em;}
-  .brand svg{width:30px;height:30px;flex-shrink:0;}
-  .nav-links{display:flex;align-items:center;gap:34px;font-size:.95rem;}
+  .brand svg{width:26px;height:26px;flex-shrink:0;}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:.92rem;}
   .nav-links a{position:relative;padding-block:4px;}
   .nav-links a::after{content:"";position:absolute;right:0;left:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .25s ease;}
   .nav-links a:hover::after{transform:scaleX(1);}
-  .nav-icons{display:flex;align-items:center;gap:18px;}
+  .nav-icons{display:flex;align-items:center;gap:16px;}
   .nav-icons button{background:none;border:0;color:inherit;position:relative;display:flex;}
-  .nav-icons svg{width:20px;height:20px;}
-  .cart-badge{
-    position:absolute;top:-8px;left:-10px;
-    background:var(--danger);color:#fff;
-    font-size:.66rem;font-weight:700;
-    min-width:16px;height:16px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;padding:0 3px;
-  }
+  .nav-icons svg{width:19px;height:19px;}
+  .cart-badge{position:absolute;top:-8px;left:-10px;background:var(--danger);color:#fff;font-size:.64rem;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 3px;}
   .menu-btn{display:none;}
-  .menu-btn svg{width:24px;height:24px;}
+  .menu-btn svg{width:22px;height:22px;}
 
   /* ---------- hero ---------- */
-  .hero{min-height:100svh;background:var(--ink);color:var(--paper);display:grid;grid-template-columns:1.15fr .85fr;align-items:stretch;}
-  .hero-text{padding:calc(var(--gap) + 70px) var(--gap) var(--gap);display:flex;flex-direction:column;justify-content:center;gap:26px;}
-  .hero-eyebrow{font-size:.95rem;color:var(--grey);}
-  .hero-title{font-weight:900;font-size:clamp(2.6rem,7vw,5.6rem);line-height:1.02;letter-spacing:-0.01em;}
-  .hero-title .en{display:block;font-size:clamp(1.1rem,2.6vw,1.6rem);font-weight:500;color:var(--grey);margin-top:14px;letter-spacing:.02em;}
-  .hero-sub{max-width:46ch;color:#c8c8c4;font-size:1.05rem;}
-  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
-  .btn{padding:15px 30px;font-size:.98rem;font-weight:700;border:1px solid var(--paper);background:var(--paper);color:var(--ink);transition:background .2s ease,color .2s ease,border-color .2s ease;}
+  .hero{background:var(--ink);color:var(--paper);padding:70px var(--gap) 90px;text-align:center;}
+  .hero-eyebrow{font-size:.85rem;color:var(--grey);letter-spacing:.04em;margin-bottom:18px;}
+  .hero-title{font-weight:900;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.04;margin-bottom:22px;}
+  .hero-sub{max-width:46ch;margin:0 auto 34px;color:#c8c8c4;font-size:1.02rem;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:56px;}
+  .btn{padding:15px 30px;font-size:.95rem;font-weight:700;border:1px solid var(--paper);background:var(--paper);color:var(--ink);transition:background .2s ease,color .2s ease,border-color .2s ease;}
   .btn:hover{background:transparent;color:var(--paper);}
   .btn.ghost{background:transparent;color:var(--paper);}
   .btn.ghost:hover{background:var(--paper);color:var(--ink);}
   .btn.accent{background:var(--danger);border-color:var(--danger);color:var(--paper);}
   .btn.accent:hover{background:transparent;color:var(--danger);}
-  .btn.small{padding:9px 16px;font-size:.85rem;border-color:var(--ink);color:var(--ink);width:100%;}
+  .btn.small{padding:10px 14px;font-size:.82rem;border-color:var(--ink);color:var(--ink);width:100%;}
   .btn.small:hover{background:var(--ink);color:var(--paper);}
-  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .btn:disabled{opacity:.35;cursor:not-allowed;}
 
-  .hero-graphic{position:relative;overflow:hidden;border-right:1px solid var(--line-dark);}
-  .stripes{position:absolute;inset:0;background:repeating-linear-gradient(55deg,var(--ink) 0 26px,var(--ink-soft) 26px 52px);}
-  .stripes::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(55deg,transparent 0 25px,rgba(247,247,245,0.05) 25px 26px);}
-  .hero-mark{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:min(46%,220px);color:var(--paper);opacity:.9;}
+  .stats-row{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:54px;color:var(--grey);font-size:.86rem;}
+  .stats-row span{padding:0 20px;position:relative;}
+  .stats-row span+span::before{content:"";position:absolute;right:100%;top:2px;bottom:2px;width:1px;background:var(--line-dark);}
 
-  @media (prefers-reduced-motion:no-preference){
-    .hero-text > *{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards;}
-    .hero-text > *:nth-child(1){animation-delay:.05s}
-    .hero-text > *:nth-child(2){animation-delay:.15s}
-    .hero-text > *:nth-child(3){animation-delay:.25s}
-    .hero-text > *:nth-child(4){animation-delay:.35s}
-    @keyframes rise{to{opacity:1;transform:none}}
-  }
+  .featured{display:inline-flex;align-items:center;gap:18px;background:var(--ink-soft);border:1px solid var(--line-dark);padding:14px 22px 14px 14px;max-width:92vw;}
+  .featured img{width:64px;height:80px;object-fit:cover;flex-shrink:0;}
+  .featured-text{text-align:right;font-size:.9rem;}
+  .featured-text b{display:block;font-weight:700;margin-bottom:2px;}
+  .featured-text span{color:var(--grey);}
 
-  /* ---------- manifesto ---------- */
-  .manifesto{padding:110px var(--gap);text-align:center;border-bottom:1px solid var(--line-light);}
-  .manifesto p{font-size:clamp(1.5rem,3.4vw,2.4rem);font-weight:700;max-width:20ch;margin:0 auto;line-height:1.35;}
+  /* ---------- collections ---------- */
+  .collections{padding:80px var(--gap);}
+  .section-title{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:900;margin-bottom:36px;}
+  .coll-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .coll-tile{background:var(--ink);color:var(--paper);aspect-ratio:16/10;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;position:relative;overflow:hidden;cursor:pointer;border:0;text-align:right;width:100%;}
+  .coll-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;transition:opacity .3s ease, transform .4s ease;}
+  .coll-tile:hover img{opacity:.4;transform:scale(1.04);}
+  .coll-tile h3{position:relative;font-size:1.1rem;font-weight:700;}
+  .coll-tile span{position:relative;color:#d8d8d4;font-size:.82rem;}
 
-  /* ---------- collection ---------- */
-  .collection{padding:100px var(--gap) 60px;}
-  .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:44px;gap:20px;flex-wrap:wrap;}
-  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:900;}
-  .head-right{display:flex;align-items:center;gap:18px;}
-  .search-input{border:0;border-bottom:1px solid var(--line-light);background:transparent;padding:6px 2px;font-size:.92rem;width:160px;}
-  .search-input:focus{border-color:var(--ink);}
-  .count{color:var(--grey);font-size:.95rem;white-space:nowrap;}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  /* ---------- shop grid ---------- */
+  .shop{padding:80px var(--gap) 60px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
   .card{background:var(--paper);display:flex;flex-direction:column;}
-  .card-art{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--ink);}
-  .card-art .stripes{opacity:.9}
-  .card-tag{position:absolute;top:14px;right:14px;background:var(--paper);color:var(--ink);font-size:.72rem;font-weight:700;padding:4px 10px;}
-  .card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1;}
-  .card-name{font-weight:700;font-size:1.02rem;}
-  .card-en{color:var(--grey);font-size:.82rem;}
-  .card-price{margin-top:auto;padding-top:14px;font-weight:700;padding-bottom:12px;}
-  .card.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .card-art{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--ink-soft);}
+  .card-art img{width:100%;height:100%;object-fit:cover;}
+  .stock-badge{position:absolute;top:14px;right:14px;background:var(--danger);color:#fff;font-size:.7rem;font-weight:700;padding:4px 10px;}
+  .card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card-name{font-weight:700;font-size:1rem;}
+  .card-en{color:var(--grey);font-size:.8rem;}
+  .price-row{display:flex;gap:10px;align-items:baseline;margin-top:4px;}
+  .price-row .now{font-weight:700;}
+  .price-row .was{color:var(--grey);text-decoration:line-through;font-size:.85rem;}
+  .size-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+  .size-chip{border:1px solid var(--ink);background:transparent;padding:6px 12px;font-size:.82rem;font-weight:700;}
+  .size-chip.sel{background:var(--ink);color:var(--paper);}
+  .size-chip:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed;border-color:var(--line-light);}
+  .card .btn.small{margin-top:10px;}
+  .card.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
   .card.reveal.in{opacity:1;transform:none;}
 
-  /* ---------- about ---------- */
-  .about{background:var(--ink);color:var(--paper);padding:110px var(--gap);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  .about h3{font-size:clamp(1.6rem,2.8vw,2.1rem);font-weight:900;margin-bottom:20px;}
-  .about p{color:#c8c8c4;max-width:44ch;font-size:1.02rem;}
-  .about-mark{justify-self:center;width:min(60%,260px);color:var(--paper);opacity:.9;}
+  /* ---------- story ---------- */
+  .story{background:var(--ink);color:var(--paper);padding:90px var(--gap);}
+  .story-inner{max-width:640px;margin:0 auto 46px;text-align:center;}
+  .story h2{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:900;line-height:1.3;margin-bottom:20px;}
+  .story p{color:#c8c8c4;font-size:1.02rem;}
+  .story-photos{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:640px;margin:0 auto;}
+  .story-photos img{width:100%;aspect-ratio:3/4;object-fit:cover;}
+
+  /* ---------- info ---------- */
+  .info{padding:90px var(--gap);max-width:680px;margin:0 auto;}
+  .info-block{padding:26px 0;border-bottom:1px solid var(--line-light);}
+  .info-block:first-child{padding-top:0;}
+  .info-block h3{font-weight:700;font-size:1.05rem;margin-bottom:10px;}
+  .info-block p{color:var(--grey);font-size:.95rem;}
+
+  /* ---------- newsletter ---------- */
+  .newsletter{background:var(--paper);border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);padding:80px var(--gap);text-align:center;}
+  .newsletter h2{font-size:clamp(1.4rem,2.8vw,1.9rem);font-weight:900;margin-bottom:12px;max-width:26ch;margin-inline:auto;}
+  .newsletter p{color:var(--grey);margin-bottom:26px;}
+  .nl-form{display:flex;gap:10px;max-width:380px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+  .nl-form input{flex:1;min-width:200px;border:1px solid var(--line-light);background:transparent;padding:13px 14px;}
+  .nl-form input:focus{border-color:var(--ink);}
+  .nl-note{margin-top:14px;font-size:.85rem;color:var(--grey);}
 
   /* ---------- footer ---------- */
-  footer{padding:60px var(--gap) 40px;}
-  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;padding-bottom:40px;border-bottom:1px solid var(--line-light);}
+  footer{padding:50px var(--gap) 36px;}
+  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:30px;border-bottom:1px solid var(--line-light);}
   .foot-brand{display:flex;align-items:center;gap:10px;font-weight:900;}
-  .foot-brand svg{width:26px;height:26px;}
-  .foot-nav{display:flex;gap:28px;flex-wrap:wrap;font-size:.92rem;color:var(--grey);}
+  .foot-brand svg{width:24px;height:24px;}
+  .foot-nav{display:flex;gap:26px;flex-wrap:wrap;font-size:.9rem;color:var(--grey);}
   .foot-nav a:hover{color:var(--ink);}
-  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:22px;font-size:.82rem;color:var(--grey);}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;font-size:.8rem;color:var(--grey);}
 
-  /* ---------- overlays (size picker / cart / checkout) ---------- */
+  /* ---------- overlays ---------- */
   .overlay{position:fixed;inset:0;z-index:100;visibility:hidden;}
-  .overlay .scrim{position:absolute;inset:0;background:rgba(11,11,12,.55);opacity:0;transition:opacity .25s ease;}
+  .overlay .scrim{position:absolute;inset:0;background:rgba(5,5,5,.55);opacity:0;transition:opacity .25s ease;}
   .overlay.open{visibility:visible;}
   .overlay.open .scrim{opacity:1;}
-
-  .modal{position:absolute;top:50%;left:50%;transform:translate(-50%,-46%);width:min(420px,90vw);background:var(--paper);border:1px solid var(--ink);padding:32px;opacity:0;transition:opacity .25s ease,transform .25s ease;max-height:86vh;overflow:auto;}
-  .overlay.open .modal{opacity:1;transform:translate(-50%,-50%);}
-  .modal h3{font-size:1.2rem;font-weight:900;margin-bottom:18px;}
-  .size-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
-  .size-btn{border:1px solid var(--ink);background:transparent;padding:9px 16px;font-weight:700;}
-  .size-btn.sel{background:var(--ink);color:var(--paper);}
-  .size-btn:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed;}
-  .qty-row{display:flex;align-items:center;gap:16px;margin-bottom:24px;font-weight:700;}
-  .qty-row button{border:1px solid var(--line-light);width:32px;height:32px;background:transparent;font-size:1.1rem;}
-  .qty-row.small button{width:26px;height:26px;font-size:.95rem;}
   .close-x{position:absolute;top:16px;left:16px;background:none;border:0;font-size:1.3rem;line-height:1;color:var(--grey);}
 
   .drawer{position:absolute;top:0;bottom:0;left:0;width:min(420px,92vw);background:var(--paper);transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;}
@@ -161,18 +156,23 @@
   .drawer-header h3{font-weight:900;}
   .drawer-items{flex:1;overflow:auto;padding:10px var(--gap);}
   .drawer-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line-light);}
-  .di-swatch{width:56px;height:70px;flex-shrink:0;position:relative;overflow:hidden;background:var(--ink);}
-  .di-info{flex:1;display:flex;flex-direction:column;gap:6px;font-size:.9rem;}
-  .di-size{color:var(--grey);font-size:.82rem;}
-  .di-price{text-align:left;font-weight:700;font-size:.9rem;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-  .di-remove{background:none;border:0;color:var(--grey);font-size:.76rem;text-decoration:underline;}
+  .di-swatch{width:52px;height:66px;flex-shrink:0;overflow:hidden;background:var(--ink-soft);}
+  .di-swatch img{width:100%;height:100%;object-fit:cover;}
+  .di-info{flex:1;display:flex;flex-direction:column;gap:6px;font-size:.88rem;}
+  .di-size{color:var(--grey);font-size:.8rem;}
+  .di-price{text-align:left;font-weight:700;font-size:.88rem;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .di-remove{background:none;border:0;color:var(--grey);font-size:.74rem;text-decoration:underline;}
   .empty{color:var(--grey);padding:30px 0;}
-  .drawer-footer{padding:20px var(--gap) 26px;border-top:1px solid var(--line-light);}
-  .drawer-total{display:flex;justify-content:space-between;font-weight:700;margin-bottom:16px;font-size:1.05rem;}
+  .qty-row{display:flex;align-items:center;gap:14px;font-weight:700;}
+  .qty-row button{border:1px solid var(--line-light);width:26px;height:26px;background:transparent;font-size:.95rem;}
+  .drawer-footer{padding:18px var(--gap) 24px;border-top:1px solid var(--line-light);}
+  .drawer-row{display:flex;justify-content:space-between;font-size:.88rem;color:var(--grey);margin-bottom:6px;}
+  .drawer-row.total{color:var(--ink);font-weight:700;font-size:1.05rem;margin:10px 0 16px;}
+  .pay-badges{text-align:center;font-size:.72rem;letter-spacing:.06em;color:var(--grey);margin-top:14px;}
 
   .checkout-modal{position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;width:min(480px,92vw);height:fit-content;max-height:90vh;overflow:auto;background:var(--paper);border:1px solid var(--ink);padding:34px;opacity:0;transition:opacity .25s ease;}
   .overlay.open .checkout-modal{opacity:1;}
-  .checkout-modal h3{font-size:1.3rem;font-weight:900;margin-bottom:20px;}
+  .checkout-modal h3{font-size:1.25rem;font-weight:900;margin-bottom:20px;}
   #checkoutForm label{display:block;font-size:.85rem;color:var(--grey);margin-bottom:14px;}
   #checkoutForm input,#checkoutForm textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;border:1px solid var(--line-light);background:transparent;color:var(--ink);}
   #checkoutForm textarea{resize:vertical;min-height:60px;}
@@ -185,24 +185,21 @@
   .confirm p{color:var(--grey);margin-bottom:10px;}
   .confirm .btn{margin-top:16px;}
 
-  /* ---------- responsive ---------- */
-  @media (max-width:900px){
+  @media (max-width:860px){
     .nav-links{display:none;}
     .menu-btn{display:block;}
-    .nav-links.open{
-      display:flex;flex-direction:column;position:fixed;top:64px;right:0;left:0;
-      background:var(--paper);color:var(--ink);padding:24px var(--gap);gap:20px;
-      border-bottom:1px solid var(--line-light);
-    }
-    .hero{grid-template-columns:1fr;}
-    .hero-graphic{min-height:280px;order:-1;border-right:0;border-bottom:1px solid var(--line-dark);}
-    .about{grid-template-columns:1fr;text-align:center;}
-    .about p{margin:0 auto;}
-    .search-input{width:120px;}
+    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:60px;right:0;left:0;background:var(--paper);color:var(--ink);padding:22px var(--gap);gap:18px;border-bottom:1px solid var(--line-light);z-index:60;}
+    .coll-grid{grid-template-columns:1fr;}
+    .story-photos{grid-template-columns:1fr 1fr;}
   }
 </style>
 </head>
 <body>
+
+<div class="ticker"><div class="ticker-track">
+  <span>משלוח חינם מעל ₪250</span><span>קולקציה ראשונה · כמות מוגבלת</span><span>החזרות עד 14 יום</span>
+  <span>משלוח חינם מעל ₪250</span><span>קולקציה ראשונה · כמות מוגבלת</span><span>החזרות עד 14 יום</span>
+</div></div>
 
 <header class="nav" id="nav">
   <div class="brand">
@@ -217,15 +214,12 @@
     <span>TRAGUS STYLE</span>
   </div>
   <nav class="nav-links" id="navLinks">
-    <a href="#hero">בית</a>
-    <a href="#collection">קולקציה</a>
-    <a href="#about">אודות</a>
-    <a href="#footer">צור קשר</a>
+    <a href="#ts-shop">חנות</a>
+    <a href="#ts-collections">קולקציות</a>
+    <a href="#ts-story">הסיפור</a>
+    <a href="#ts-info">מידות ומשלוחים</a>
   </nav>
   <div class="nav-icons">
-    <button id="searchBtn" aria-label="חיפוש">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-    </button>
     <button id="cartBtn" aria-label="סל קניות">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
       <span class="cart-badge" id="cartBadge" style="display:none">0</span>
@@ -236,75 +230,99 @@
   </div>
 </header>
 
-<section class="hero" id="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">דרופ חדש</p>
-    <h1 class="hero-title">
-      אל תשחקו איתנו
-      <span class="en"><span class="ltr">DON'T PLAY WITH US</span></span>
-    </h1>
-    <p class="hero-sub">קולקציית ההשקה החדשה של Tragus Style. שחור על לבן, בלי פשרות, בכמות מוגבלת.</p>
-    <div class="hero-cta">
-      <a href="#collection" class="btn accent">לצפייה בקולקציה</a>
-      <a href="#about" class="btn ghost">קצת עלינו</a>
-    </div>
+<section class="hero">
+  <p class="hero-eyebrow">DROP 01 · 2026</p>
+  <h1 class="hero-title">אל תשחקו איתנו</h1>
+  <p class="hero-sub">סטריטוור ישראלי בכמות מוגבלת. כל דגם נתפר בסדרה קטנה, ומי שמפספס — מחכה לדרופ הבא.</p>
+  <div class="hero-cta">
+    <a href="#ts-shop" class="btn accent">לקולקציה המלאה</a>
+    <a href="#ts-story" class="btn ghost">מי אנחנו</a>
   </div>
-  <div class="hero-graphic">
-    <div class="stripes"></div>
-    <svg class="hero-mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
-      <path d="M8 14 L14 4 L18 14 Z"/><path d="M40 14 L34 4 L30 14 Z"/>
-      <path d="M10 14 L38 14 L42 26 L34 40 L14 40 L6 26 Z"/>
-      <path d="M14 20 L22 20"/><path d="M12 26 L24 26"/><path d="M14 32 L22 32"/>
-      <path d="M26 20 L34 20"/><path d="M24 26 L36 26"/><path d="M26 32 L34 32"/>
-      <circle cx="18" cy="22" r="1.1" fill="currentColor" stroke="none"/>
-      <circle cx="30" cy="22" r="1.1" fill="currentColor" stroke="none"/>
-    </svg>
+  <div class="stats-row">
+    <span id="statCount">2 דגמים בקולקציה</span>
+    <span>ייצור בישראל</span>
+    <span>מלאי מוגבל</span>
+  </div>
+  <a class="featured" id="featuredLink" href="#ts-shop">
+    <img id="featuredImg" src="" alt="">
+    <span class="featured-text"><b id="featuredName"></b><span id="featuredPrice"></span></span>
+  </a>
+</section>
+
+<section class="collections" id="ts-collections">
+  <h2 class="section-title">קולקציות</h2>
+  <div class="coll-grid">
+    <button class="coll-tile" data-filter="hoodies">
+      <img src="https://tragusstyle.com/cdn/shop/files/dont-play-with-us-hoodie-model-front-back_cb58a82c-7a90-4bfa-aac9-af9d63f1a9e6.jpg?v=1784302538&width=700" alt="">
+      <h3>קולקציית חורף</h3>
+      <span>1 דגמים</span>
+    </button>
+    <button class="coll-tile" data-filter="accessories">
+      <img src="https://tragusstyle.com/cdn/shop/files/tragus-tiger-slides-black-white.jpg?v=1785614964&width=700" alt="">
+      <h3>אביזרים</h3>
+      <span>1 דגמים</span>
+    </button>
   </div>
 </section>
 
-<section class="manifesto">
-  <p>לא עוד מותג. שפה של רחוב, בשחור־לבן.</p>
-</section>
-
-<section class="collection" id="collection">
-  <div class="section-head">
-    <h2>הקולקציה</h2>
-    <div class="head-right">
-      <input class="search-input" id="searchInput" placeholder="חיפוש...">
-      <span class="count" id="itemCount"></span>
-    </div>
-  </div>
+<section class="shop" id="ts-shop">
+  <h2 class="section-title">כל הדגמים</h2>
   <div class="grid" id="grid"><p style="color:var(--grey)">טוען מוצרים…</p></div>
 </section>
 
-<section class="about" id="about">
-  <div>
-    <h3>מי אנחנו</h3>
-    <p>Tragus Style נולד מהרחוב, לא מלוח מודעות. כל פריט נבנה בשחור ולבן, עם נמר כשפת סימנים — חד, שקט, ולא מתנצל. לקהל הסטריטוור הישראלי שרוצה בגדים שמדברים בלי להרים קול.</p>
+<section class="story" id="ts-story">
+  <div class="story-inner">
+    <h2>הנמר הוא לא הדפס. הוא הצהרה.</h2>
+    <p>Tragus Style נולד מהרצון להביא סטריטוור שמרגיש יקר בלי להתנצל על זה. גזרות אוברסייז, בדים כבדים, והדפסים שמחזיקים כיבוס אחרי כיבוס. אנחנו מייצרים בסדרות קטנות בכוונה — כדי שמה שקנית לא יסובב על כל השכונה.</p>
   </div>
-  <svg class="about-mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
-    <path d="M8 14 L14 4 L18 14 Z"/><path d="M40 14 L34 4 L30 14 Z"/>
-    <path d="M10 14 L38 14 L42 26 L34 40 L14 40 L6 26 Z"/>
-    <path d="M14 20 L22 20"/><path d="M12 26 L24 26"/><path d="M14 32 L22 32"/>
-    <path d="M26 20 L34 20"/><path d="M24 26 L36 26"/><path d="M26 32 L34 32"/>
-    <circle cx="18" cy="22" r="1" fill="currentColor" stroke="none"/>
-    <circle cx="30" cy="22" r="1" fill="currentColor" stroke="none"/>
-  </svg>
+  <div class="story-photos">
+    <img src="https://tragusstyle.com/cdn/shop/files/tragus-tiger-slides-black-white.jpg?v=1785614964&width=700" alt="כפכפי Tragus Tiger">
+    <img src="https://tragusstyle.com/cdn/shop/files/dont-play-with-us-hoodie-model-front-back_cb58a82c-7a90-4bfa-aac9-af9d63f1a9e6.jpg?v=1784302538&width=700" alt="קפוצ׳ון אל תשחקו איתנו">
+  </div>
 </section>
 
-<footer id="footer">
+<section class="info" id="ts-info">
+  <h2 class="section-title">מידות ומשלוחים</h2>
+  <div class="info-block">
+    <h3>מידות וגזרות</h3>
+    <p>הסטים בגזרת אוברסייז — מי שרוצה גזרה צמודה יותר כדאי שיקח מידה אחת למטה. הקפוצ׳ון בגזרה רגילה.</p>
+  </div>
+  <div class="info-block">
+    <h3>משלוחים</h3>
+    <p>משלוח עד הבית 2–5 ימי עסקים · ₪29. מעל ₪250 המשלוח חינם. איסוף עצמי בתיאום.</p>
+  </div>
+  <div class="info-block">
+    <h3>החזרות</h3>
+    <p>עד 14 יום מקבלת ההזמנה, בפריט שלא נלבש ועם התווית. החזר כספי מלא או החלפת מידה.</p>
+  </div>
+  <div class="info-block">
+    <h3>טיפול בהדפס</h3>
+    <p>לכבס הפוך בתוכנית עדינה, בלי מייבש כביסה. לא לגהץ ישירות על ההדפס.</p>
+  </div>
+</section>
+
+<section class="newsletter">
+  <h2>הדרופ הבא יוצא בלי הודעה מוקדמת</h2>
+  <p>חוץ מלמי שנרשם. אימייל אחד לפני כל דרופ, בלי ספאם.</p>
+  <form class="nl-form" id="nlForm">
+    <input type="email" required placeholder="האימייל שלך" id="nlEmail">
+    <button class="btn accent" type="submit">הרשמה</button>
+  </form>
+  <p class="nl-note" id="nlNote"></p>
+</section>
+
+<footer>
   <div class="foot-top">
     <div class="foot-brand">
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-        <path d="M10 14 L38 14 L42 26 L34 40 L14 40 L6 26 Z"/>
-        <path d="M14 20 L22 20"/><path d="M26 20 L34 20"/>
+        <path d="M10 14 L38 14 L42 26 L34 40 L14 40 L6 26 Z"/><path d="M14 20 L22 20"/><path d="M26 20 L34 20"/>
       </svg>
       <span>TRAGUS STYLE</span>
     </div>
     <nav class="foot-nav">
-      <a href="#hero">בית</a>
-      <a href="#collection">קולקציה</a>
-      <a href="#about">אודות</a>
+      <a href="#ts-shop">חנות</a>
+      <a href="#ts-info">משלוחים והחזרות</a>
+      <a href="#ts-story">הסיפור</a>
       <a href="https://instagram.com/tragustyle" target="_blank" rel="noopener"><span class="ltr">@tragustyle</span></a>
     </nav>
   </div>
@@ -314,27 +332,18 @@
   </div>
 </footer>
 
-<!-- size picker -->
-<div class="overlay" id="sizeOverlay">
-  <div class="scrim" data-close="sizeOverlay"></div>
-  <div class="modal">
-    <button class="close-x" data-close="sizeOverlay">×</button>
-    <div id="sizeModalBody"></div>
-  </div>
-</div>
-
 <!-- cart drawer -->
 <div class="overlay" id="cartOverlay">
   <div class="scrim" data-close="cartOverlay"></div>
   <div class="drawer">
-    <div class="drawer-header">
-      <h3>הסל שלך</h3>
-      <button class="close-x" style="position:static" data-close="cartOverlay">×</button>
-    </div>
+    <div class="drawer-header"><h3>הסל שלך</h3><button class="close-x" style="position:static" data-close="cartOverlay">×</button></div>
     <div class="drawer-items" id="cartItems"></div>
     <div class="drawer-footer">
-      <div class="drawer-total"><span>סה"כ</span><span id="cartTotal">₪0</span></div>
-      <button class="btn accent" id="checkoutBtn" style="width:100%">המשך לתשלום</button>
+      <div class="drawer-row"><span>סכום ביניים</span><span id="dSubtotal">₪0</span></div>
+      <div class="drawer-row"><span>משלוח</span><span id="dShipping">₪0</span></div>
+      <div class="drawer-row total"><span>סה"כ</span><span id="dTotal">₪0</span></div>
+      <button class="btn accent" id="checkoutBtn" style="width:100%">מעבר לתשלום מאובטח</button>
+      <p class="pay-badges">VISA · MASTERCARD · BIT · APPLE PAY</p>
     </div>
   </div>
 </div>
@@ -353,139 +362,125 @@
   const SUPABASE_URL = 'https://zlzvoiuoufqrksibfpyc.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_95CwStsRSz4_IyzulbUVhg_phGxgalH';
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  const SIZE_ORDER = ['S','M','L','XL'];
+  const FREE_SHIP_FROM = 250, SHIP_FEE = 29;
 
   let PRODUCTS = [];
   let CART = JSON.parse(localStorage.getItem('tragus_cart') || '[]');
-
   const grid = document.getElementById('grid');
-  const itemCount = document.getElementById('itemCount');
-  const searchInput = document.getElementById('searchInput');
   const cartBadge = document.getElementById('cartBadge');
   const cartItems = document.getElementById('cartItems');
-  const cartTotalEl = document.getElementById('cartTotal');
-  const sizeOverlay = document.getElementById('sizeOverlay');
-  const sizeModalBody = document.getElementById('sizeModalBody');
   const cartOverlay = document.getElementById('cartOverlay');
   const checkoutOverlay = document.getElementById('checkoutOverlay');
   const checkoutBody = document.getElementById('checkoutBody');
 
-  /* ---------- load products ---------- */
   async function loadProducts(){
     const { data: products, error } = await sb.from('products')
-      .select('id,slug,name_he,name_en,price,category,sort_order')
+      .select('id,slug,name_he,name_en,price,compare_at_price,category,sort_order')
       .eq('is_active', true).order('sort_order');
-    if (error) { grid.innerHTML = '<p style="color:var(--grey)">שגיאה בטעינת המוצרים.</p>'; console.error(error); return; }
+    if (error){ grid.innerHTML = '<p style="color:var(--grey)">שגיאה בטעינת המוצרים.</p>'; console.error(error); return; }
     const { data: variants } = await sb.from('product_variants').select('id,product_id,size,stock_quantity');
+    const { data: images } = await sb.from('product_images').select('product_id,image_url,sort_order').order('sort_order');
     PRODUCTS = products.map(p => ({
       ...p,
-      variants: (variants||[]).filter(v => v.product_id === p.id)
-        .sort((a,b) => SIZE_ORDER.indexOf(a.size) - SIZE_ORDER.indexOf(b.size))
+      variants: (variants||[]).filter(v => v.product_id === p.id),
+      images: (images||[]).filter(im => im.product_id === p.id).map(im => im.image_url)
     }));
     renderGrid(PRODUCTS);
+    renderFeatured();
+    document.getElementById('statCount').textContent = PRODUCTS.length + ' דגמים בקולקציה';
   }
 
+  function renderFeatured(){
+    const p = PRODUCTS[0];
+    if (!p) return;
+    document.getElementById('featuredImg').src = p.images[0] || '';
+    document.getElementById('featuredName').textContent = p.name_he;
+    document.getElementById('featuredPrice').textContent = '· ' + p.price + '.00 NIS';
+  }
+
+  function stockLeft(p){ return p.variants.reduce((s,v) => s + v.stock_quantity, 0); }
+
   function cardHTML(p, i){
-    const tag = p.slug === 'dont-play-with-us-hoodie' ? '<span class="card-tag">דרופ חדש</span>' : '';
+    const left = stockLeft(p);
+    const badge = left > 0 && left <= 3 ? `<span class="stock-badge">נשארו ${left}</span>` : '';
     return `
-    <article class="card reveal" style="transition-delay:${(i%3)*80}ms">
-      <div class="card-art">
-        <div class="stripes" style="transform:rotate(${(i%2?1:-1)*4}deg) scale(1.15)"></div>
-        ${tag}
-      </div>
+    <article class="card reveal" style="transition-delay:${(i%3)*80}ms" data-cat="${p.category}">
+      <div class="card-art"><img src="${p.images[0]||''}" alt="${p.name_he}" loading="lazy">${badge}</div>
       <div class="card-body">
         <span class="card-name">${p.name_he}</span>
         <span class="card-en ltr">${p.name_en||''}</span>
-        <span class="card-price">₪${Number(p.price)}</span>
-        <button class="btn small" data-add="${p.id}">הוספה לסל</button>
+        <div class="price-row">
+          <span class="now">₪${Number(p.price)}</span>
+          ${p.compare_at_price ? `<span class="was">₪${Number(p.compare_at_price)}</span>` : ''}
+        </div>
+        <div class="size-chips" data-product="${p.id}">
+          ${p.variants.map(v => `<button class="size-chip" ${v.stock_quantity<1?'disabled':''} data-size="${v.size}">${v.size}</button>`).join('')}
+        </div>
+        <button class="btn small" data-add="${p.id}" disabled>בחר/י מידה</button>
       </div>
     </article>`;
   }
 
   function renderGrid(list){
     grid.innerHTML = list.length ? list.map(cardHTML).join('') : '<p style="color:var(--grey)">לא נמצאו מוצרים.</p>';
-    itemCount.textContent = list.length + ' פריטים';
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    document.querySelectorAll('[data-add]').forEach(btn =>
-      btn.addEventListener('click', () => openSizeModal(btn.dataset.add)));
-  }
 
-  searchInput.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    renderGrid(PRODUCTS.filter(p =>
-      p.name_he.includes(q) || (p.name_en||'').toLowerCase().includes(q)));
-  });
-  document.getElementById('searchBtn').addEventListener('click', () => {
-    document.getElementById('collection').scrollIntoView({behavior:'smooth'});
-    searchInput.focus();
-  });
-
-  /* ---------- size picker ---------- */
-  let activeProduct = null, activeSize = null, activeQty = 1;
-
-  function openSizeModal(productId){
-    activeProduct = PRODUCTS.find(p => p.id === productId);
-    activeSize = null; activeQty = 1;
-    renderSizeModal();
-    sizeOverlay.classList.add('open');
-  }
-  function renderSizeModal(){
-    sizeModalBody.innerHTML = `
-      <h3>${activeProduct.name_he}<span class="ltr" style="display:block;color:var(--grey);font-size:.82rem;font-weight:400;margin-top:4px">${activeProduct.name_en||''}</span></h3>
-      <div class="size-row">
-        ${activeProduct.variants.map(v => `
-          <button class="size-btn ${activeSize===v.size?'sel':''}" ${v.stock_quantity<1?'disabled':''} data-size="${v.size}">${v.size}</button>
-        `).join('')}
-      </div>
-      <div class="qty-row">
-        <button data-qty="-1">−</button><span id="qtyVal">${activeQty}</span><button data-qty="1">+</button>
-      </div>
-      <button class="btn accent" id="confirmAdd" style="width:100%" ${activeSize?'':'disabled'}>
-        הוספה לסל · ₪${activeProduct.price * activeQty}
-      </button>`;
-    sizeModalBody.querySelectorAll('[data-size]').forEach(b =>
-      b.addEventListener('click', () => { activeSize = b.dataset.size; renderSizeModal(); }));
-    sizeModalBody.querySelectorAll('[data-qty]').forEach(b =>
-      b.addEventListener('click', () => { activeQty = Math.max(1, activeQty + Number(b.dataset.qty)); renderSizeModal(); }));
-    const confirmBtn = document.getElementById('confirmAdd');
-    if (confirmBtn) confirmBtn.addEventListener('click', addToCart);
-  }
-  function addToCart(){
-    const variant = activeProduct.variants.find(v => v.size === activeSize);
-    const existing = CART.find(i => i.variant_id === variant.id);
-    if (existing) existing.qty += activeQty;
-    else CART.push({
-      variant_id: variant.id, product_id: activeProduct.id,
-      name_he: activeProduct.name_he, name_en: activeProduct.name_en,
-      size: activeSize, price: Number(activeProduct.price), qty: activeQty
+    document.querySelectorAll('.size-chips').forEach(wrap => {
+      const pid = wrap.dataset.product;
+      const btn = wrap.closest('.card').querySelector('[data-add]');
+      let chosen = null;
+      wrap.querySelectorAll('.size-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          chosen = chip.dataset.size;
+          wrap.querySelectorAll('.size-chip').forEach(c => c.classList.toggle('sel', c === chip));
+          btn.disabled = false; btn.textContent = 'הוספה לסל';
+          btn.dataset.size = chosen;
+        });
+      });
     });
-    saveCart(); renderCart(); closeOverlay('sizeOverlay'); openOverlay('cartOverlay');
+    document.querySelectorAll('[data-add]').forEach(btn =>
+      btn.addEventListener('click', () => addToCart(btn.dataset.add, btn.dataset.size)));
   }
 
-  /* ---------- cart ---------- */
+  document.querySelectorAll('.coll-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      document.getElementById('ts-shop').scrollIntoView({behavior:'smooth'});
+      renderGrid(PRODUCTS.filter(p => p.category === tile.dataset.filter));
+    });
+  });
+
+  function addToCart(productId, size){
+    const product = PRODUCTS.find(p => p.id === productId);
+    const variant = product.variants.find(v => v.size === size);
+    if (!variant) return;
+    const existing = CART.find(i => i.variant_id === variant.id);
+    if (existing) existing.qty += 1;
+    else CART.push({
+      variant_id: variant.id, product_id: product.id,
+      name_he: product.name_he, name_en: product.name_en,
+      size, price: Number(product.price), qty: 1, image: product.images[0]||''
+    });
+    saveCart(); renderCart(); openOverlay('cartOverlay');
+  }
+
   function saveCart(){ localStorage.setItem('tragus_cart', JSON.stringify(CART)); updateBadge(); }
-  function cartTotal(){ return CART.reduce((s,i) => s + i.price*i.qty, 0); }
+  function subtotal(){ return CART.reduce((s,i) => s + i.price*i.qty, 0); }
+  function shippingFee(){ const s = subtotal(); return s === 0 || s >= FREE_SHIP_FROM ? 0 : SHIP_FEE; }
   function updateBadge(){
     const n = CART.reduce((s,i) => s+i.qty, 0);
-    cartBadge.textContent = n;
-    cartBadge.style.display = n ? 'flex' : 'none';
+    cartBadge.textContent = n; cartBadge.style.display = n ? 'flex' : 'none';
   }
   function renderCart(){
     cartItems.innerHTML = CART.length ? CART.map((item, idx) => `
       <div class="drawer-item">
-        <div class="di-swatch"><div class="stripes"></div></div>
+        <div class="di-swatch"><img src="${item.image}" alt=""></div>
         <div class="di-info">
-          <span>${item.name_he} <span class="ltr">${item.name_en||''}</span></span>
+          <span>${item.name_he}</span>
           <span class="di-size">מידה ${item.size}</span>
-          <div class="qty-row small">
-            <button data-cqty="${idx}:-1">−</button><span>${item.qty}</span><button data-cqty="${idx}:1">+</button>
-          </div>
+          <div class="qty-row"><button data-cqty="${idx}:-1">−</button><span>${item.qty}</span><button data-cqty="${idx}:1">+</button></div>
         </div>
-        <div class="di-price">
-          ₪${item.price*item.qty}
-          <button class="di-remove" data-remove="${idx}">הסרה</button>
-        </div>
-      </div>`).join('') : '<p class="empty">הסל ריק</p>';
+        <div class="di-price">₪${item.price*item.qty}<button class="di-remove" data-remove="${idx}">הסרה</button></div>
+      </div>`).join('') : '<p class="empty">הסל שלך ריק</p>';
     cartItems.querySelectorAll('[data-cqty]').forEach(b => b.addEventListener('click', () => {
       const [idx,d] = b.dataset.cqty.split(':');
       CART[idx].qty = Math.max(1, CART[idx].qty + Number(d));
@@ -494,12 +489,13 @@
     cartItems.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', () => {
       CART.splice(Number(b.dataset.remove), 1); saveCart(); renderCart();
     }));
-    cartTotalEl.textContent = '₪' + cartTotal();
+    document.getElementById('dSubtotal').textContent = '₪' + subtotal();
+    document.getElementById('dShipping').textContent = '₪' + shippingFee();
+    document.getElementById('dTotal').textContent = '₪' + (subtotal() + shippingFee());
     updateBadge();
   }
   document.getElementById('cartBtn').addEventListener('click', () => openOverlay('cartOverlay'));
 
-  /* ---------- checkout ---------- */
   document.getElementById('checkoutBtn').addEventListener('click', () => {
     if (!CART.length) return;
     closeOverlay('cartOverlay'); openOverlay('checkoutOverlay'); renderCheckoutForm();
@@ -515,7 +511,8 @@
         <label>הערות<textarea name="notes"></textarea></label>
         <div class="checkout-summary">
           ${CART.map(i => `<div class="cs-row"><span>${i.name_he} · מידה ${i.size} × ${i.qty}</span><span>₪${i.price*i.qty}</span></div>`).join('')}
-          <div class="cs-row total"><span>סה"כ</span><span>₪${cartTotal()}</span></div>
+          <div class="cs-row"><span>משלוח</span><span>₪${shippingFee()}</span></div>
+          <div class="cs-row total"><span>סה"כ</span><span>₪${subtotal()+shippingFee()}</span></div>
         </div>
         <p class="checkout-note">התשלום מתבצע בתיאום אישי מול הצוות לאחר קליטת ההזמנה — ניצור איתך קשר בטלפון תוך זמן קצר.</p>
         <button class="btn accent" type="submit" style="width:100%">שליחת ההזמנה</button>
@@ -525,13 +522,13 @@
   async function submitOrder(e){
     e.preventDefault();
     const fd = new FormData(e.target);
-    const subtotal = cartTotal();
+    const sub = subtotal(), ship = shippingFee();
     const submitBtn = e.target.querySelector('button[type=submit]');
     submitBtn.disabled = true; submitBtn.textContent = 'שולח...';
     const { data: order, error } = await sb.from('orders').insert({
       customer_name: fd.get('name'), phone: fd.get('phone'), email: fd.get('email') || null,
       address: fd.get('address'), city: fd.get('city'), notes: fd.get('notes') || null,
-      subtotal, shipping_fee: 0, total: subtotal
+      subtotal: sub, shipping_fee: ship, total: sub + ship
     }).select().single();
     if (error){
       submitBtn.disabled = false; submitBtn.textContent = 'שליחת ההזמנה';
@@ -553,25 +550,24 @@
     document.getElementById('closeConfirm').addEventListener('click', () => closeOverlay('checkoutOverlay'));
   }
 
-  /* ---------- overlays ---------- */
-  function openOverlay(id){ document.getElementById(id).classList.add('open'); }
-  function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
-  document.querySelectorAll('[data-close]').forEach(el =>
-    el.addEventListener('click', () => closeOverlay(el.dataset.close)));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') ['sizeOverlay','cartOverlay','checkoutOverlay'].forEach(closeOverlay);
+  document.getElementById('nlForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('nlEmail').value;
+    const note = document.getElementById('nlNote');
+    const { error } = await sb.from('newsletter_signups').insert({ email });
+    note.textContent = error ? 'האימייל כבר רשום, או שקרתה שגיאה.' : 'נרשמת! נעדכן אותך לפני כל דרופ.';
+    if (!error) e.target.reset();
   });
 
-  /* ---------- nav ---------- */
-  const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('solid', window.scrollY > 40);
-  document.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  function openOverlay(id){ document.getElementById(id).classList.add('open'); }
+  function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeOverlay(el.dataset.close)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') ['cartOverlay','checkoutOverlay'].forEach(closeOverlay); });
+
   const navLinks = document.getElementById('navLinks');
   document.getElementById('menuBtn').addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-  /* ---------- reveal on scroll ---------- */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, {threshold:.15});
